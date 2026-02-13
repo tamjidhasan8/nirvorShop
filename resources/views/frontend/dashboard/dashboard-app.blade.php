@@ -24,14 +24,17 @@
                                             <a class="nav-link" href=""><i class="fi-rs-marker mr-10"></i>My Address</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link"href=""><i class="fi-rs-user mr-10"></i>Account details</a>
+                                            <a class="nav-link"href="{{ route('profile') }}"><i class="fi-rs-user mr-10"></i>Account details</a>
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link"href=""><i class="fi-rs-heart mr-10"></i> Wishlist</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="login.html"><i class="fi-rs-sign-out mr-10"></i>Logout</a>
+                                            <a class="nav-link" onclick="event.preventDefault(); $('.form-logout').submit()" href="login.html"><i class="fi-rs-sign-out mr-10"></i>Logout</a>
                                         </li>
+                                        <form class="form-logout" action="{{ route('logout') }}" method="POST">
+                                            @csrf
+                                        </form>
                                     </ul>
                                 </div>
                             </div>
