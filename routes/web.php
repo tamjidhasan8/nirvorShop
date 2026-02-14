@@ -3,6 +3,7 @@
 use App\Http\Controllers\Frontend\UserDashboardController;
 use App\Http\Controllers\Frontend\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Frontend\VendorDashboardController;
 
 Route::get('/', function () {
     return view('frontend.home.index');
@@ -21,7 +22,12 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::put('/profile/password', [ProfileController::class, 'passwordUpdate' ])->name('password.update');
 });
 
+/** Vendor Routs */
+Route::group(['prefix'=> 'vendor', 'as' => 'vendor.', 'middleware' => ['auth', 'verified']], function () {
+    Route::get('/dashboard', [VendorDashboardController::class, 'index'])->name('dashboard');
 
+
+});
 
 
 

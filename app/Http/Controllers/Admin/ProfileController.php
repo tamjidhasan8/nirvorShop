@@ -31,13 +31,27 @@ class ProfileController extends Controller
 
             $filepath = $this->uploadFile($request->file('avatar'), $user->avatar);
             $filepath ? $user->avatar = $filepath : null;
-
         }
 
         $user->name = $request->name;
         $user->email = $request->email;
         $user->save();
 
+        AlertService::updated();
+        return redirect()->back();
+    }
+
+    function passwordUpdate(Request $request): RedirectResponse
+    {
+
+        $request->validate([
+            'current_password' => ['required', 'string', 'current_password'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+        ]);
+
+        $user = auth('admin')->user();
+        $user->password = bcrypt($request->password);
+        $user->save();
         AlertService::updated();
         return redirect()->back();
     }
