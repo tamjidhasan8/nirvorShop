@@ -5,6 +5,7 @@ use App\Http\Controllers\Frontend\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Frontend\VendorDashboardController;
 use App\Http\Controllers\Frontend\KycController;
+use App\Http\Controllers\Frontend\StoreController;
 
 Route::get('/', function () {
     return view('frontend.home.index');
@@ -31,6 +32,8 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
 Route::group(['prefix'=> 'vendor', 'as' => 'vendor.', 'middleware' => ['auth', 'verified']], function () {
     Route::get('/dashboard', [VendorDashboardController::class, 'index'])->name('dashboard');
 
+/** Shop Profile Routs */
+Route::resource('store-profile', StoreController::class);
 
 });
 
