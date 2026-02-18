@@ -13,7 +13,10 @@ use Illuminate\Http\Request;
 class KycController extends Controller
 {
     use FileUploadTrait;
-    function index(): View {
+    function index(): View | RedirectResponse {
+        if(auth('web')->user()->kyc?->status == 'approved' || auth('web')->user()->kyc?->status == 'pending' ) {
+            return redirect()->route('vendor.dashboard');
+        }
         return view("frontend.pages.kyc");
     }
 
@@ -27,7 +30,7 @@ class KycController extends Controller
             'document_scan_copy' => ['required', 'mimes:png, pdf, csv, docx', 'max:10000'],
         ]);
 
-        
+
         $kyc = new Kyc();
         $kyc->full_name = $request->full_name;
         $kyc->user_id = auth('web')->user()->id;
@@ -44,6 +47,6 @@ class KycController extends Controller
 
         AlertService::created('Your KYC has been submitted successfully! Please wait for admin approval.');
 
-        return redirect()->route('vendor.dashboard.index');
+        return redirect()->route('vendor.dashboard');
     }
 }
