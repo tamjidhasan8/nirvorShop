@@ -56,7 +56,11 @@
                         </tbody>
                     </table>
                 </div>
+                <div class="card-footer">
+                    {{ $kycRequests-> links() }}
+                </div>
             </div>
+
         </div>
     </div>
 @endsection
