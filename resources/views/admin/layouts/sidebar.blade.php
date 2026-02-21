@@ -252,6 +252,13 @@
                                       <a class="dropdown-item" href="{{ route('admin.kyc.index') }}">
                                           All Requests
                                       </a>
+                                      <a class="dropdown-item" href="{{ route('admin.kyc.pending') }}">
+                                          Pending Requests
+                                      </a>
+                                      </a>
+                                      <a class="dropdown-item" href="{{ route('admin.kyc.rejected') }}">
+                                          Rejected Requests
+                                      </a>
                                   </div>
                               </div>
                           </div>

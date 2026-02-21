@@ -6,7 +6,7 @@
             <div class="card-header">
                 <h3 class="card-title">All KYC Requests</h3>
                 <div class="card-actions">
-                    <a href="javascript:history.back()" class="btn btn-primary btn-3">
+                    <a href="{{ url()->previous() }}" class="btn btn-primary btn-3">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                             fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                             stroke-linejoin="round" class="icon icon-2">

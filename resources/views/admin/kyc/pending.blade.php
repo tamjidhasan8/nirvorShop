@@ -4,9 +4,9 @@
     <div class="container-xl">
         <div class="card">
             <div class="card-header">
-                <h3 class="card-title">All KYC Requests</h3>
+                <h3 class="card-title">Pending KYC Requests</h3>
                 <div class="card-actions">
-                   
+
                 </div>
             </div>
             <div class="card-body p-0">
@@ -24,7 +24,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($kycRequests as $kycRequest)
+                            @forelse ($kycRequests as $kycRequest)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $kycRequest->full_name }}</td>
@@ -44,7 +44,11 @@
                                         <a href="{{ route('admin.kyc.show', $kycRequest) }}">View</a>
                                     </td>
                                 </tr>
-                            @endforeach
+                                @empty
+                                <tr>
+                                    <td colspan="7" class="text-center">No pending KYC requests available right now.</td>
+                                </tr>
+                            @endforelse
                         </tbody>
                     </table>
                 </div>

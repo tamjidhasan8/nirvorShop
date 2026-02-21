@@ -19,6 +19,16 @@ class KycRequestController extends Controller
         $kycRequests = Kyc::paginate(25);
         return view("admin.kyc.index", compact("kycRequests"));
     }
+    function pending(): View
+    {
+        $kycRequests = Kyc::whereStatus('pending')->paginate(25);
+        return view("admin.kyc.pending", compact("kycRequests"));
+    }
+    function rejected(): View
+    {
+        $kycRequests = Kyc::whereStatus('rejected')->paginate(25);
+        return view("admin.kyc.rejected", compact("kycRequests"));
+    }
     function show(Kyc $kyc_request): View
     {
         return view('admin.kyc.show', compact('kyc_request'));
@@ -49,12 +59,10 @@ class KycRequestController extends Controller
                 Best regards,
                 The Support Team'
             );
-        }
-
-        elseif ($kyc_request->status == 'rejected') {
+        } elseif ($kyc_request->status == 'rejected') {
             MailService::send(
                 to: $kyc_request->user->email,
-                subject:'KYC Application Has Been Rejected',
+                subject: 'KYC Application Has Been Rejected',
                 body: 'Dear ' . $kyc_request->user->name . ',
 
                 Thank you for submitting your KYC application.
